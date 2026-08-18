@@ -1,0 +1,983 @@
+/* =========================================================================
+   Seitenspezifische Layouts.
+   Reihenfolge: Hero-Varianten, Start, Über uns, Fingerapotheke, BoosterGane,
+   zuletzt die schmalen Fenster.
+   ========================================================================= */
+
+/* Der Kopf liegt fixiert ueber dem Inhalt. Jede Seite beginnt deshalb mit
+   Luft in Kopfhoehe — sonst laege die erste Zeile darunter. */
+.seite > section:first-child {
+  padding-top: clamp(92px, 10vw, 124px);
+}
+
+/* =========================================================================
+   Hero-Varianten
+   ========================================================================= */
+
+.hero {
+  position: relative;
+  padding-bottom: clamp(56px, 8vw, 96px);
+}
+
+.hero__kicker {
+  margin-bottom: 16px;
+}
+
+.hero__titel {
+  max-width: 22ch;
+}
+
+.hero .mitte .hero__titel {
+  margin-inline: auto;
+}
+
+.hero__text {
+  margin-top: 20px;
+  max-width: 56ch;
+  white-space: pre-line;
+}
+
+.hero__aktion {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.hero .mitte .hero__aktion {
+  justify-content: center;
+}
+
+/* --- Startseite: Bild ueber die ganze Flaeche ----------------------------- */
+
+.hero--dunkel {
+  padding-bottom: clamp(80px, 11vw, 140px);
+  overflow: hidden;
+}
+
+.hero--dunkel .hero__bild {
+  position: absolute;
+  inset: -8% 0;
+  z-index: 0;
+}
+
+.hero--dunkel .hero__bild .bild {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  aspect-ratio: auto !important;
+}
+
+/* Der Schleier haelt den Text lesbar, egal welches Foto darunter liegt. */
+.hero--dunkel .hero__bild::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 34, 0.7) 0%,
+    rgba(10, 10, 34, 0.46) 45%,
+    rgba(10, 10, 34, 0.84) 100%
+  );
+}
+
+.hero--dunkel .hero__innen {
+  position: relative;
+  z-index: 1;
+}
+
+.hero--dunkel .hero__titel {
+  max-width: 26ch;
+}
+
+/* --- Zweispaltig (Über uns, Fingerapotheke) -------------------------------- */
+
+.hero__geteilt {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: clamp(32px, 5vw, 72px);
+}
+
+.hero--koralle {
+  background: var(--koralle);
+}
+
+.hero--koralle .lead {
+  color: rgba(16, 16, 26, 0.76);
+}
+
+.hero--koralle .kicker {
+  color: rgba(16, 16, 26, 0.68);
+}
+
+/* --- BoosterGane ----------------------------------------------------------- */
+
+.hero--booster .hero__titel {
+  max-width: 20ch;
+}
+
+.hero__schieber {
+  margin-top: clamp(24px, 4vw, 40px);
+}
+
+.hero__zweiter {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(28px, 4vw, 56px);
+  margin-top: clamp(28px, 4vw, 52px);
+}
+
+.hero__videotext {
+  margin-top: 10px;
+}
+
+.hero__titel-unten {
+  max-width: 16ch;
+}
+
+/* =========================================================================
+   Startseite
+   ========================================================================= */
+
+.stimmen__titel {
+  max-width: 30ch;
+  margin-inline: auto;
+  margin-bottom: clamp(24px, 4vw, 40px);
+}
+
+/* --- Blockaden ------------------------------------------------------------ */
+
+.blockaden {
+  padding-block: clamp(20px, 3vw, 40px);
+}
+
+.blockaden__panel {
+  padding: clamp(40px, 6vw, 88px) clamp(26px, 5vw, 72px);
+  border-radius: 28px;
+  text-align: center;
+}
+
+.blockaden__titel {
+  max-width: 18ch;
+  margin-inline: auto;
+}
+
+.blockaden__text {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+
+.blockaden__zeile {
+  max-width: 60ch;
+  color: var(--auf-violett-weich);
+}
+
+.blockaden__frage {
+  margin-top: 12px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* --- Wurzel --------------------------------------------------------------- */
+
+.wurzel__titel {
+  max-width: 26ch;
+  margin-inline: auto;
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+
+.wurzel__liste {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(20px, 3vw, 34px);
+}
+
+.wurzel__punkt {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: var(--t-klein);
+  color: var(--tinte-weich);
+}
+
+.wurzel__num {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--violett-schleier);
+  color: var(--violett);
+  font-size: var(--t-h4);
+  font-weight: 700;
+}
+
+.haken {
+  flex: none;
+  margin-top: 3px;
+  color: var(--violett);
+}
+
+/* --- Tools ---------------------------------------------------------------- */
+
+.tools__titel {
+  max-width: 22ch;
+  margin-inline: auto;
+  margin-bottom: clamp(30px, 4vw, 52px);
+}
+
+.tools__liste {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 3vw, 36px);
+}
+
+.toolkarte {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: clamp(24px, 4vw, 56px);
+  padding: clamp(26px, 4vw, 52px);
+  border-radius: var(--radius-xl);
+  background: var(--papier-alt);
+}
+
+/* Jede zweite Karte spiegelt Bild und Text. `order` statt einer zweiten
+   Grid-Definition, damit die Lesereihenfolge im Quelltext gleich bleibt. */
+.toolkarte--gedreht .toolkarte__text {
+  order: 2;
+}
+
+.toolkarte__name {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: var(--t-mini);
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--violett);
+}
+
+.toolkarte__text > p {
+  margin-top: 14px;
+}
+
+.toolkarte__punkte {
+  margin: 22px 0 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.toolkarte__punkte li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: var(--t-klein);
+  color: var(--tinte-weich);
+}
+
+.toolkarte__bild {
+  background: #fff;
+}
+
+/* --- Tore: horizontale Passage -------------------------------------------- */
+
+.tore__buehne {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.tore__spur {
+  display: flex;
+  align-items: stretch;
+  gap: 22px;
+  padding-inline: var(--rand);
+  will-change: transform;
+}
+
+.tore__einstieg {
+  flex: none;
+  width: min(48vw, 460px);
+  display: flex;
+  align-items: center;
+  padding-right: 20px;
+}
+
+.tore__titel {
+  max-width: 16ch;
+}
+
+.torkarte {
+  flex: none;
+  width: min(72vw, 320px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 32px 28px;
+  border-radius: var(--radius-l);
+}
+
+.torkarte__num {
+  font-size: var(--t-mini);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--lime);
+}
+
+.torkarte p {
+  color: var(--auf-violett-weich);
+  font-size: var(--t-klein);
+}
+
+/* --- Weitere Tools --------------------------------------------------------- */
+
+.weitere__titel {
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+
+.weitere__raster {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(232px, 1fr));
+  gap: 20px;
+}
+
+.weitere__karte {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-l);
+  background: var(--papier-alt);
+  overflow: hidden;
+}
+
+.weitere__karte .bild {
+  border-radius: 0;
+}
+
+.weitere__inhalt {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 22px 20px 24px;
+}
+
+.weitere__unterzeile {
+  font-size: var(--t-klein);
+  font-weight: 600;
+  color: var(--violett);
+}
+
+.weitere__inhalt .knopf {
+  margin-top: 10px;
+}
+
+/* --- Rettung --------------------------------------------------------------- */
+
+.rettung__innen {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(32px, 5vw, 72px);
+}
+
+.rettung__absatz {
+  margin-top: 14px;
+  color: var(--auf-violett-weich);
+}
+
+.rettung__aktion {
+  margin-top: 28px;
+}
+
+/* --- FAQ -------------------------------------------------------------------- */
+
+.faq__unterzeile {
+  margin-top: 12px;
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+
+.faq__aktion {
+  margin-top: clamp(28px, 4vw, 44px);
+}
+
+/* =========================================================================
+   Über uns
+   ========================================================================= */
+
+.band {
+  padding-block: clamp(44px, 6vw, 76px);
+}
+
+.band__text {
+  margin-top: 14px;
+  color: var(--auf-violett-weich);
+}
+
+.stationen__innen {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: clamp(20px, 3vw, 40px);
+}
+
+.stationen__spur {
+  position: relative;
+  width: 2px;
+  margin-inline: auto;
+  background: var(--linie);
+  border-radius: 2px;
+}
+
+.stationen__faden {
+  position: absolute;
+  inset: 0;
+  background: var(--violett);
+  border-radius: 2px;
+  transform: scaleY(0);
+  transform-origin: 50% 0%;
+}
+
+.stationen__folien {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(48px, 8vw, 96px);
+}
+
+.station__inhalt {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: start;
+  gap: clamp(24px, 4vw, 56px);
+}
+
+/* Ohne Bild darf der Text die ganze Breite nehmen. */
+.station__inhalt:not(:has(.station__bild)) {
+  grid-template-columns: 1fr;
+  max-width: 64ch;
+}
+
+.station__absatz {
+  color: var(--tinte-weich);
+}
+
+.station__absatz + .station__absatz {
+  margin-top: 12px;
+}
+
+/* --- 2016 ------------------------------------------------------------------ */
+
+.jahr {
+  padding-block: clamp(56px, 8vw, 104px);
+}
+
+.jahr__marke {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-align: center;
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+
+.jahr__raster {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.jahr__karte {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 24px;
+  padding: 28px;
+  border-radius: var(--radius-l);
+  background: var(--violett-tief);
+}
+
+.jahr__karte--breit {
+  grid-column: 1 / -1;
+}
+
+.jahr__text > p {
+  margin-top: 12px;
+  color: var(--auf-violett-weich);
+  font-size: var(--t-klein);
+}
+
+.jahr__text .knopf {
+  margin-top: 20px;
+}
+
+/* --- Weitere Stationen ------------------------------------------------------ */
+
+.spaeter__eintrag {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(28px, 5vw, 72px);
+  padding-block: clamp(32px, 5vw, 60px);
+  border-bottom: 1px solid var(--linie);
+}
+
+.spaeter__eintrag:last-child {
+  border-bottom: 0;
+}
+
+.spaeter__eintrag:not(:has(.spaeter__bild)) {
+  grid-template-columns: 1fr;
+  max-width: 64ch;
+}
+
+.spaeter__absatz {
+  margin-top: 12px;
+  color: var(--tinte-weich);
+}
+
+.spaeter__aktion {
+  margin-top: 22px;
+}
+
+/* --- Heute ------------------------------------------------------------------ */
+
+.heute__innen {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(32px, 5vw, 72px);
+}
+
+.heute__einleitung {
+  margin-top: 18px;
+  color: var(--tinte-weich);
+}
+
+.heute__liste {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.heute__punkt {
+  padding-left: 18px;
+  position: relative;
+  color: var(--tinte-weich);
+  font-size: var(--t-klein);
+}
+
+.heute__punkt::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--violett);
+}
+
+/* --- Bücher ------------------------------------------------------------------ */
+
+.buecher__innen {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: clamp(32px, 5vw, 72px);
+}
+
+.buecher__absatz {
+  margin-top: 16px;
+}
+
+.buecher__zitat {
+  margin-top: 24px;
+  padding-left: 20px;
+  border-left: 3px solid var(--violett);
+  font-style: italic;
+  color: var(--tinte-weich);
+}
+
+.buecher__zitat cite {
+  display: block;
+  margin-top: 10px;
+  font-style: normal;
+  font-size: var(--t-klein);
+  font-weight: 600;
+  color: var(--tinte);
+}
+
+.buecher__aktion {
+  margin-top: 26px;
+}
+
+/* --- Team --------------------------------------------------------------------- */
+
+.team__titel {
+  margin-bottom: clamp(30px, 4vw, 52px);
+}
+
+.team__raster {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(196px, 1fr));
+  gap: clamp(20px, 3vw, 34px);
+  text-align: center;
+}
+
+.person .bild {
+  border-radius: var(--radius-m);
+  margin-bottom: 16px;
+}
+
+.person__rolle {
+  margin-top: 4px;
+  font-size: var(--t-klein);
+  font-weight: 600;
+  color: var(--violett);
+}
+
+.person__text {
+  margin-top: 8px;
+}
+
+/* =========================================================================
+   Fingerapotheke
+   ========================================================================= */
+
+.vorteile__titel {
+  max-width: 26ch;
+  margin-inline: auto;
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+
+.vorteile__raster {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.vorteil {
+  padding: 28px 26px;
+  border-radius: var(--radius-m);
+  background: var(--koralle-schleier);
+  border: 1px solid rgba(228, 109, 99, 0.22);
+}
+
+.vorteil p {
+  margin-top: 12px;
+}
+
+/* --- Übung ---------------------------------------------------------------- */
+
+.uebung__titel {
+  max-width: 24ch;
+  margin-inline: auto;
+  margin-bottom: clamp(24px, 4vw, 40px);
+}
+
+.uebung__innen {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: clamp(28px, 5vw, 64px);
+}
+
+.uebung__vorbemerkung {
+  margin-top: 14px;
+}
+
+.uebung__schritte {
+  margin: 22px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.uebung__schritt {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: var(--t-klein);
+  color: var(--tinte-weich);
+}
+
+.uebung__num {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--koralle);
+  color: var(--tinte);
+  font-size: var(--t-mini);
+  font-weight: 700;
+}
+
+/* --- Herkunft --------------------------------------------------------------- */
+
+.herkunft__panel {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  align-items: center;
+  gap: clamp(28px, 4vw, 60px);
+  padding: clamp(28px, 4vw, 56px);
+  border-radius: var(--radius-xl);
+  background: var(--koralle-tief);
+  color: #fff;
+}
+
+.herkunft__absatz {
+  margin-top: 14px;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.herkunft__aktion {
+  margin-top: 26px;
+}
+
+/* =========================================================================
+   BoosterGane
+   ========================================================================= */
+
+.band-zahlen {
+  padding-block: clamp(36px, 5vw, 60px);
+}
+
+.berichte {
+  padding-block: clamp(40px, 6vw, 72px);
+}
+
+.sprache__titel {
+  max-width: 24ch;
+  margin-inline: auto;
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+
+.sprache__raster {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 18px;
+  /* Die Karten kippen beim Auftritt um die X-Achse — ohne Perspektive bliebe
+     das eine reine Stauchung. */
+  perspective: 900px;
+}
+
+.schritt {
+  padding: 28px 26px;
+  border-radius: var(--radius-m);
+}
+
+.schritt p {
+  margin-top: 10px;
+}
+
+.beispiele__raster {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 4vw, 48px);
+  align-items: start;
+}
+
+.beispiel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.beispiel > .bild,
+.beispiel > .videobild {
+  width: 100%;
+  margin-bottom: 6px;
+}
+
+.beispiel__punkte {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: var(--t-klein);
+  color: var(--tinte-weich);
+}
+
+.beispiel__punkte li {
+  padding-left: 16px;
+  position: relative;
+}
+
+.beispiel__punkte li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--violett);
+}
+
+.beispiel .knopf {
+  margin-top: 8px;
+}
+
+.betrachtung__innen {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(32px, 5vw, 72px);
+}
+
+.betrachtung__absatz {
+  margin-top: 14px;
+  color: var(--tinte-weich);
+}
+
+.betrachtung__aktion {
+  margin-top: 26px;
+}
+
+.zitat--violett {
+  padding-block: clamp(56px, 8vw, 100px);
+}
+
+.zitat--violett .zitat__text + .zitat__text {
+  margin-top: 14px;
+}
+
+.sorten__titel {
+  margin-bottom: 12px;
+}
+
+.sorten__unterzeile {
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+
+.sorten__raster {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
+  gap: 18px;
+}
+
+.sorte {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 24px 22px;
+  border-radius: var(--radius-l);
+}
+
+.sorte .bild {
+  width: 100%;
+}
+
+.sorte__unterzeile {
+  font-size: var(--t-klein);
+  font-weight: 600;
+  color: var(--lime);
+}
+
+.sorte .knopf {
+  margin-top: auto;
+}
+
+.sorten__aktion {
+  margin-top: clamp(28px, 4vw, 44px);
+}
+
+.entstehung__innen {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(32px, 5vw, 72px);
+}
+
+.entstehung__name {
+  margin-top: 12px;
+  font-weight: 600;
+}
+
+.entstehung__absatz {
+  margin-top: 12px;
+  color: var(--auf-violett-weich);
+  white-space: pre-line;
+}
+
+.entstehung__aktion {
+  margin-top: 26px;
+}
+
+/* =========================================================================
+   Schmale Fenster
+   ========================================================================= */
+
+@media (max-width: 900px) {
+  .hero__geteilt,
+  .hero__zweiter,
+  .rettung__innen,
+  .station__inhalt,
+  .jahr__raster,
+  .jahr__karte,
+  .spaeter__eintrag,
+  .heute__innen,
+  .buecher__innen,
+  .uebung__innen,
+  .herkunft__panel,
+  .beispiele__raster,
+  .betrachtung__innen,
+  .entstehung__innen,
+  .toolkarte {
+    grid-template-columns: 1fr;
+  }
+
+  /* Bild unter den Text, wo es im Quelltext davor steht. */
+  .heute__bild,
+  .betrachtung__bild,
+  .herkunft__bild,
+  .rettung__bild,
+  .entstehung__bild {
+    order: 2;
+  }
+
+  /* Auf einer Spalte ist die Spiegelung sinnlos. */
+  .toolkarte--gedreht .toolkarte__text {
+    order: 0;
+  }
+
+  .buecher__bild {
+    max-width: 240px;
+  }
+
+  .stationen__innen {
+    grid-template-columns: 1fr;
+  }
+
+  .stationen__spur {
+    display: none;
+  }
+
+  /* Die horizontale Passage wird zur normalen Liste; der Pin ist per
+     matchMedia bereits abgeschaltet. */
+  .tore__buehne {
+    height: auto;
+    display: block;
+    padding-block: var(--sektion);
+  }
+
+  .tore__spur {
+    flex-direction: column;
+    transform: none !important;
+  }
+
+  .tore__einstieg,
+  .torkarte {
+    width: 100%;
+  }
+}

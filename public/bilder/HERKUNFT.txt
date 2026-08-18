@@ -1,0 +1,41 @@
+# Herkunft der Bilder
+# Format: dateiname|pfad auf https://onecdn.io/
+# Quelle: gienowmethode.onepage.me — hier in voller Aufloesung gezogen und
+# anschliessend fuers Web verkleinert. Original jederzeit neu ladbar via:
+#   curl -L -o <name> https://onecdn.io/<pfad>
+
+logo-hell|media/1fb8fdd3-348b-4aa6-b018-2fe5da9c67b3/md2x
+logo-dunkel|media/68aaa63f-b62a-4bd0-a034-c6808fb17b00/md2x
+logo-fuss|media/b8047b67-a0e0-46d1-b05b-09f75db48d5a/md2x
+start-hero|media/b7717902-4d4d-48f5-bf13-3babfbb28883/xlg2x
+tool-selfq|media/f60c4e41-a86c-4d43-81ea-c0b1f7a87694/xlg2x
+tool-fingerapotheke|media/55fff312-4c7b-4174-b3da-e40b34ce608b/xlg2x
+tool-boostergane|media/ba892ffc-1916-44f2-bf53-f8a69505d2e9/xlg2x
+weitere-klangqodes|media/0cfcfbe2-6c75-4b26-8ab2-ed8c244ef4a7/xlg2x
+weitere-qothematik|media/3b71e804-21f1-43f7-b2ab-29e2de65dda8/xlg2x
+weitere-tsoraat|media/01c0af5c-6b5d-49db-82a9-2be19c6c7e63/xlg2x
+weitere-tapeten|media/29ac100d-2bcd-47a7-bdf3-dd46541c1a03/xlg2x
+start-rettung|media/feb372ee-1452-4baa-a7b5-e2ff5aa76634/xlg2x
+finger-slide1|media/fc9bb9bc-2f67-4d61-b97a-9edb130efbed/xlg2x
+finger-slide2|media/1b172329-f920-4ef1-8008-e0f6ef1a799d/xlg2x
+finger-slide3|media/2777c23f-ab6e-4b12-8a6d-8cc265841057/xlg2x
+finger-francis|media/15d8bc3f-2ac6-45bc-b18f-3823916ebcbf/xlg2x
+finger-notfallgeste|media/8c9571d1-365b-4b97-8c85-c2b50f4afc6d/xlg2x
+finger-herkunft|media/7079a893-f2d8-49e1-89f7-da63cf747b69/xlg2x
+booster-slide1|media/149443e5-60fe-4bbf-b056-70bae95d4837/xlg2x
+booster-slide2|media/8368f2e9-7dba-4f11-bc72-a64bfec3feef/xlg2x
+booster-lulu-lunge|media/278e10ed-3a0d-44ee-a032-a68a5057817e/xlg2x
+booster-slide5|media/9973a7ee-f833-445b-9020-4cb45c6fabcb/xlg2x
+booster-slide6|media/5aa36e85-877d-4816-997b-af4b85d2b4ec/xlg2x
+booster-spezial|media/d4f5e2a0-6b0f-4611-9c06-c49d7d13ea1f/xlg2x
+booster-gertie-video|video-thumbnail/d46475f2-6854-43ef-b716-c27a0e306ef5_92c75fd9-2da2-459c-8083-05984c74c481/xlg2x
+ueber-hero-team|media/5b8ab66e-fe33-47e5-ac70-fafe8a969b36/xlg2x
+ueber-miasmatisch|media/d4d9a455-eaa9-4e4f-82d3-712e95919e7f/xlg2x
+ueber-thromboman|media/1d068bbd-92dd-4543-a6c1-1ffd8ee36a0d/xlg2x
+ueber-liebesbotschaft|video-thumbnail/d46475f2-6854-43ef-b716-c27a0e306ef5_73b74d55-9630-443b-95a5-71d438aa1b49/xlg2x
+ueber-buch|media/67c93a71-b773-4e5f-a2e7-d126f0a24608/xlg2x
+team-peter|media/ecc7c755-9864-44d3-a4a5-a915e7794907/xlg2x
+team-gertie|media/3dbe3d36-9153-470b-b3d8-c0a193823f00/xlg2x
+team-gudrun|media/54698792-c6aa-45e6-9d34-3fcbc2c2db74/xlg2x
+team-sinja|media/2a4e6913-f88c-4051-994f-254f11060e01/xlg2x
+team-laurenz|media/e8e5e77c-f602-43a5-a620-d64646883afd/xlg2x

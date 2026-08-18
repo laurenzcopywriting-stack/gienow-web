@@ -1,0 +1,966 @@
+/* =========================================================================
+   Bausteine: alles, was auf mehr als einer Seite vorkommt.
+   ========================================================================= */
+
+/* --- ScrollSmoother-Geruest ---------------------------------------------
+   Ohne diese beiden Regeln misst der Smoother die Inhaltshoehe falsch. */
+
+#smooth-wrapper {
+  overflow: hidden;
+}
+
+#smooth-content {
+  will-change: transform;
+}
+
+/* --- Fortschrittsbalken --------------------------------------------------- */
+
+.fortschritt {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 3px;
+  z-index: 120;
+  pointer-events: none;
+}
+
+.fortschritt__fuellung {
+  height: 100%;
+  background: var(--violett);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+
+/* =========================================================================
+   Maskierte Ueberschriften
+   ========================================================================= */
+
+.masken-titel {
+  line-height: 1.1;
+}
+
+.maske {
+  display: inline-flex;
+  overflow: hidden;
+  vertical-align: bottom;
+  /* Unterlaengen (g, y, ß) wuerden von der Maskenkante abgeschnitten. Der
+     Puffer unten gibt ihnen Platz und wird oben wieder abgezogen. */
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+  padding-right: 0.26em;
+}
+
+.wort {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* =========================================================================
+   Knopf
+   ========================================================================= */
+
+.knopf {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 26px;
+  border-radius: var(--radius-voll);
+  font-size: var(--t-klein);
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  transition: transform 0.22s ease, background-color 0.22s ease, color 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.knopf:hover {
+  transform: translateY(-2px);
+}
+
+.knopf:active {
+  transform: translateY(0);
+}
+
+.knopf--klein {
+  padding: 10px 18px;
+  font-size: var(--t-mini);
+}
+
+.knopf--violett {
+  background: var(--violett);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(91, 71, 224, 0.28);
+}
+.knopf--violett:hover {
+  background: var(--violett-tief);
+}
+
+.knopf--tinte {
+  background: var(--tinte);
+  color: #fff;
+}
+.knopf--tinte:hover {
+  background: #000;
+}
+
+.knopf--weiss {
+  background: #fff;
+  color: var(--tinte);
+  box-shadow: var(--schatten-karte);
+}
+.knopf--weiss:hover {
+  background: var(--papier-alt);
+}
+
+.knopf--lime {
+  background: var(--lime);
+  color: var(--tinte);
+}
+
+.knopf--umriss {
+  border: 1.5px solid var(--linie);
+  color: var(--tinte);
+}
+.knopf--umriss:hover {
+  border-color: var(--violett);
+  color: var(--violett);
+}
+
+.knopf--umriss-hell {
+  border: 1.5px solid var(--linie-hell);
+  color: #fff;
+}
+.knopf--umriss-hell:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* =========================================================================
+   Kopf
+   ========================================================================= */
+
+.kopf {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 12px 0;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.kopf.ist-abgesetzt {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 var(--linie);
+}
+
+.kopf__innen {
+  width: 100%;
+  max-width: var(--breite);
+  margin-inline: auto;
+  padding-inline: var(--rand);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.kopf__marke {
+  flex: none;
+}
+
+/* Das Logo ist ein JPEG mit weissem Grund. `mix-blend-mode: multiply` laesst
+   diesen Grund auf hellen Flaechen verschwinden, ohne dass die Datei
+   freigestellt werden muesste. */
+.kopf__marke img {
+  width: clamp(104px, 12vw, 148px);
+  height: auto;
+  mix-blend-mode: multiply;
+}
+
+.kopf__nav {
+  margin-left: auto;
+}
+
+.kopf__nav ul {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2vw, 28px);
+}
+
+.kopf__nav a {
+  font-size: var(--t-klein);
+  font-weight: 500;
+  color: var(--tinte-weich);
+  white-space: nowrap;
+  transition: color 0.18s ease;
+}
+
+.kopf__nav a:hover {
+  color: var(--tinte);
+}
+
+.kopf__rechts {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: none;
+}
+
+.kopf__sozial {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--t-klein);
+  color: var(--tinte-weich);
+  transition: color 0.18s ease;
+}
+
+.kopf__sozial:hover {
+  color: var(--tinte);
+}
+
+/* --- Personen-Menue ------------------------------------------------------- */
+
+.person-menu {
+  position: relative;
+}
+
+.person-menu__name {
+  display: inline-block;
+  padding: 8px 4px;
+  font-size: var(--t-klein);
+  font-weight: 500;
+  color: var(--tinte-weich);
+  white-space: nowrap;
+  cursor: default;
+}
+
+.person-menu__klappe {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -6px);
+  display: flex;
+  flex-direction: column;
+  min-width: 130px;
+  padding: 8px;
+  border-radius: var(--radius-m);
+  background: #fff;
+  box-shadow: var(--schatten-hoch);
+  /* Zugeklappt aus dem Fluss UND aus der Tastaturreihenfolge nehmen. Nur
+     `opacity: 0` liesse die Links weiterhin fokussierbar. */
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+}
+
+.person-menu:hover .person-menu__klappe,
+.person-menu:focus-within .person-menu__klappe {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.person-menu__klappe a {
+  padding: 7px 10px;
+  border-radius: var(--radius-s);
+  font-size: var(--t-klein);
+  color: var(--tinte-weich);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.person-menu__klappe a:hover {
+  background: var(--papier-alt);
+  color: var(--tinte);
+}
+
+/* --- Brenner -------------------------------------------------------------- */
+
+.kopf__brenner {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-s);
+  position: relative;
+  flex: none;
+}
+
+.kopf__brenner span,
+.kopf__brenner span::before,
+.kopf__brenner span::after {
+  position: absolute;
+  left: 11px;
+  width: 20px;
+  height: 2px;
+  background: var(--tinte);
+  border-radius: 2px;
+  transition: transform 0.24s ease, opacity 0.18s ease;
+}
+
+.kopf__brenner span {
+  top: 20px;
+}
+.kopf__brenner span::before {
+  content: '';
+  left: 0;
+  top: -6px;
+}
+.kopf__brenner span::after {
+  content: '';
+  left: 0;
+  top: 6px;
+}
+
+.kopf.ist-offen .kopf__brenner span {
+  background: transparent;
+}
+.kopf.ist-offen .kopf__brenner span::before {
+  transform: translateY(6px) rotate(45deg);
+}
+.kopf.ist-offen .kopf__brenner span::after {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* =========================================================================
+   Bild und Platzhalter
+   ========================================================================= */
+
+.bild {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-l);
+  background: var(--papier-alt);
+}
+
+.bild img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Der Platzhalter greift nur noch, wenn eine Datei fehlt — sichtbar
+   gestrichelt, damit das nicht wie Gestaltung aussieht. */
+.bild__platzhalter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 18px;
+  text-align: center;
+  border: 1.5px dashed rgba(16, 16, 26, 0.2);
+  border-radius: inherit;
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(16, 16, 26, 0.028) 0 10px,
+    transparent 10px 20px
+  );
+}
+
+.bild__marke {
+  font-size: var(--t-mini);
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--tinte-zart);
+}
+
+.bild__notiz {
+  font-size: var(--t-klein);
+  font-weight: 500;
+  color: var(--tinte-weich);
+  max-width: 26ch;
+  line-height: 1.4;
+}
+
+.bild__pfad {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.7rem;
+  color: var(--tinte-zart);
+  word-break: break-all;
+}
+
+.auf-dunkel .bild__platzhalter,
+.auf-violett .bild__platzhalter,
+.auf-koralle .bild__platzhalter {
+  border-color: rgba(255, 255, 255, 0.36);
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.07) 0 10px,
+    transparent 10px 20px
+  );
+}
+
+.auf-dunkel .bild__marke,
+.auf-violett .bild__marke,
+.auf-koralle .bild__marke,
+.auf-dunkel .bild__notiz,
+.auf-violett .bild__notiz,
+.auf-koralle .bild__notiz,
+.auf-dunkel .bild__pfad,
+.auf-violett .bild__pfad,
+.auf-koralle .bild__pfad {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+/* --- Videovorschau -------------------------------------------------------- */
+
+.videobild {
+  position: relative;
+}
+
+.videobild__knopf {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--tinte);
+  box-shadow: var(--schatten-karte);
+  pointer-events: none;
+}
+
+/* =========================================================================
+   YouTube-Einbettung (laedt erst auf Klick)
+   ========================================================================= */
+
+.einbettung__start {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border-radius: var(--radius-m);
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.einbettung__start img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease, opacity 0.3s ease;
+}
+
+.einbettung__start:hover img {
+  transform: scale(1.03);
+  opacity: 0.86;
+}
+
+.einbettung__knopf {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.4));
+}
+
+.einbettung__rahmen {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: var(--radius-m);
+}
+
+.einbettung__zeile {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  margin-top: 10px;
+  font-size: var(--t-mini);
+  color: var(--tinte-weich);
+}
+
+.einbettung__titel {
+  font-weight: 600;
+  color: var(--tinte);
+}
+
+.einbettung__extern {
+  margin-left: auto;
+  text-decoration: underline;
+}
+
+/* =========================================================================
+   Laufband
+   ========================================================================= */
+
+.laufband {
+  /* Sicherheitsnetz: waehrend GSAP die Spurbreite noch nicht kennt, darf
+     nichts seitlich aus dem Dokument ragen. */
+  overflow: hidden;
+}
+
+.laufband__spur {
+  display: flex;
+  align-items: stretch;
+  gap: 18px;
+  width: max-content;
+  will-change: transform;
+}
+
+.laufband__karte {
+  flex: none;
+  width: min(78vw, 330px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px 22px;
+  border-radius: var(--radius-m);
+  background: var(--violett);
+  color: #fff;
+  font-size: var(--t-klein);
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+/* Farbvarianten je Seite. */
+.stimmen--koralle .laufband__karte {
+  background: var(--koralle-karte);
+  color: var(--tinte);
+}
+
+.berichte .laufband__karte {
+  background: #fff;
+  color: var(--tinte);
+}
+
+/* =========================================================================
+   Schieber
+   ========================================================================= */
+
+.schieber__spur {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  border-radius: var(--radius-l);
+}
+
+.schieber__spur::-webkit-scrollbar {
+  display: none;
+}
+
+.schieber__folie {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+
+.schieber__folie .bild {
+  border-radius: var(--radius-l);
+}
+
+.schieber__steuerung {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.schieber__pfeil {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid var(--linie);
+  color: var(--tinte);
+  transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.schieber__pfeil:hover:not(:disabled) {
+  border-color: var(--violett);
+  color: var(--violett);
+}
+
+.schieber__pfeil:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.schieber__zaehler {
+  font-size: var(--t-klein);
+  color: var(--tinte-weich);
+  font-variant-numeric: tabular-nums;
+}
+
+.auf-violett .schieber__pfeil,
+.seite--booster .schieber__pfeil {
+  border-color: var(--linie);
+}
+
+.schieber__aktion {
+  margin-top: clamp(22px, 3vw, 36px);
+}
+
+/* =========================================================================
+   Kennzahlen
+   ========================================================================= */
+
+.zahlen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: clamp(24px, 4vw, 56px);
+  text-align: center;
+}
+
+.zahl {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.zahl__wert {
+  font-size: clamp(2.3rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  font-variant-numeric: tabular-nums;
+}
+
+.zahl__label {
+  font-size: var(--t-klein);
+  color: var(--tinte-weich);
+  max-width: 30ch;
+  margin-inline: auto;
+}
+
+.zahlen--dunkel .zahl__label {
+  color: var(--auf-violett-weich);
+}
+
+/* =========================================================================
+   Akkordeon
+   ========================================================================= */
+
+.akkordeon {
+  border-top: 1px solid var(--linie);
+}
+
+.akkordeon__zeile {
+  border-bottom: 1px solid var(--linie);
+}
+
+.akkordeon__ueberschrift {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.akkordeon__knopf {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  padding: 22px 4px;
+  text-align: left;
+  font-size: var(--t-h4);
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  transition: color 0.2s ease;
+}
+
+.akkordeon__knopf:hover {
+  color: var(--violett);
+}
+
+/* Das Plus/Minus-Zeichen: zwei Striche, von denen einer wegdreht. */
+.akkordeon__zeichen {
+  position: relative;
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+
+.akkordeon__zeichen::before,
+.akkordeon__zeichen::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1.8px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform 0.28s ease;
+}
+
+.akkordeon__zeichen::after {
+  transform: rotate(90deg);
+}
+
+.ist-offen .akkordeon__zeichen::after {
+  transform: rotate(0deg);
+}
+
+.akkordeon__koerper {
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.akkordeon__text {
+  padding: 0 4px 24px;
+  color: var(--tinte-weich);
+  max-width: 68ch;
+  white-space: pre-line;
+}
+
+/* =========================================================================
+   Zitat
+   ========================================================================= */
+
+.zitat__block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.zitat__zeichen {
+  font-size: 3rem;
+  line-height: 0.6;
+  color: var(--violett);
+}
+
+.zitat__text {
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: -0.016em;
+  max-width: 52ch;
+  white-space: pre-line;
+}
+
+.zitat__name {
+  font-style: normal;
+  font-weight: 600;
+  font-size: var(--t-klein);
+}
+
+.zitat__rolle {
+  display: block;
+  font-size: var(--t-mini);
+  color: var(--tinte-zart);
+}
+
+.auf-violett .zitat__rolle {
+  color: var(--auf-violett-weich);
+}
+
+.zitat__person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+
+.zitat__portrait {
+  width: 48px;
+  flex: none;
+  border-radius: 50%;
+}
+
+.zitat__aktion {
+  margin-top: 8px;
+}
+
+/* =========================================================================
+   Farbflaechen
+   ========================================================================= */
+
+.auf-violett {
+  background: var(--violett);
+  color: var(--auf-violett);
+}
+
+.auf-dunkel {
+  background: var(--navy);
+  color: #fff;
+}
+
+.auf-koralle {
+  background: var(--koralle);
+  color: var(--tinte);
+}
+
+.auf-violett .lead,
+.auf-dunkel .lead,
+.auf-violett .klein,
+.auf-dunkel .klein {
+  color: var(--auf-violett-weich);
+}
+
+.auf-violett .betont,
+.auf-dunkel .betont {
+  color: var(--lime);
+}
+
+.auf-koralle .betont {
+  color: var(--violett);
+}
+
+/* =========================================================================
+   Fuss
+   ========================================================================= */
+
+.fuss {
+  padding-top: clamp(48px, 7vw, 84px);
+  padding-bottom: 36px;
+}
+
+.fuss__innen {
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) 2.2fr;
+  gap: clamp(32px, 5vw, 72px);
+}
+
+.fuss__marke img {
+  width: 150px;
+  height: auto;
+  border-radius: var(--radius-s);
+}
+
+.fuss__sozial {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.fuss__sozial a {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-s);
+  background: rgba(255, 255, 255, 0.16);
+  transition: background-color 0.2s ease;
+}
+
+.fuss__sozial a:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.fuss__rechte {
+  display: block;
+  margin-top: 26px;
+  font-size: var(--t-mini);
+  color: var(--auf-violett-weich);
+}
+
+.fuss__spalten {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: clamp(24px, 3vw, 40px);
+}
+
+.fuss__titel {
+  font-size: var(--t-klein);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.fuss__spalte li + li {
+  margin-top: 9px;
+}
+
+.fuss__spalte a {
+  font-size: var(--t-klein);
+  color: var(--auf-violett-weich);
+  transition: color 0.18s ease;
+}
+
+.fuss__spalte a:hover {
+  color: #fff;
+}
+
+/* =========================================================================
+   Schmale Fenster
+   ========================================================================= */
+
+@media (max-width: 980px) {
+  .kopf__brenner {
+    display: block;
+  }
+
+  .kopf__nav {
+    position: absolute;
+    top: 100%;
+    left: var(--rand);
+    right: var(--rand);
+    margin: 0;
+    padding: 18px 22px;
+    border-radius: var(--radius-m);
+    background: #fff;
+    box-shadow: var(--schatten-hoch);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  }
+
+  .kopf.ist-offen .kopf__nav {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .kopf__nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .kopf__rechts {
+    margin-left: auto;
+  }
+
+  .person-menu {
+    display: none;
+  }
+
+  .fuss__innen {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .kopf__sozial span {
+    display: none;
+  }
+}
+
+/* =========================================================================
+   Reduzierte Bewegung
+   Die Choreografie schaltet sich in JS selbst ab; hier fallen zusaetzlich
+   alle CSS-Uebergaenge weg.
+   ========================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .knopf:hover {
+    transform: none;
+  }
+
+  /* Ohne Animation muss das Band von Hand scrollbar sein. */
+  .laufband {
+    overflow-x: auto;
+  }
+}
