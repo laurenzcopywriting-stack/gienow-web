@@ -1,5 +1,18 @@
 # gienow-web
 
+**Live:** https://laurenzcopywriting-stack.github.io/gienow-web/
+
+| Seite | Adresse |
+|---|---|
+| Startseite | https://laurenzcopywriting-stack.github.io/gienow-web/ |
+| Über uns | https://laurenzcopywriting-stack.github.io/gienow-web/ueber-uns/ |
+| Fingerapotheke | https://laurenzcopywriting-stack.github.io/gienow-web/fingerapotheke/ |
+| BoosterGane | https://laurenzcopywriting-stack.github.io/gienow-web/boostergane/ |
+
+Jeder Push auf `main` baut und veröffentlicht neu
+(`.github/workflows/pages.yml`). Der Basispfad kommt dabei aus der
+Pages-Konfiguration — für eine eigene Domain genügt `BASE_PFAD=/ npm run build`.
+
 Nachbau der vier Seiten von `gienowmethode.onepage.me` als eigener Code.
 
 ## Starten

@@ -142,9 +142,12 @@ einer Stelle: `src/inhalte/gemeinsam.ts`, Block `LINKS`.
 - **Das Logo ist ein JPEG mit weißem Grund** (so liegt es im CDN) und wird per
   `mix-blend-mode: multiply` eingebunden. Eine freigestellte PNG- oder
   SVG-Fassung wäre sauberer.
-- **Bilder liegen lokal** unter `public/bilder/` (36 Dateien).
-  `weitere-tapeten.png` ist mit 20 MB sehr groß und sollte vor dem Livegang
-  verkleinert werden.
+- **Bilder liegen lokal** unter `public/bilder/` (36 Dateien). Sie kamen als
+  CDN-Originale bis 2880×12705 px und sind fürs Web verkleinert: längste
+  Kante höchstens 2000 px, höchstens 4 Megapixel. Zusammen **42,6 MB → 6,8 MB**
+  (allein die Meditationstapete: 20 MB → 0,05 MB). Die Herkunft jeder Datei
+  steht in `public/bilder/HERKUNFT.txt` — die Originale lassen sich damit
+  jederzeit neu laden.
 - **Endlosband:** Die Live-Seite dupliziert die Feedback-Karten dreimal im
   Markup; hier reicht die zweite Kopie für den nahtlosen Umlauf.
 
@@ -161,9 +164,28 @@ sichtbar.
 
 ---
 
+### Veröffentlichung
+
+Die Seite liegt auf GitHub Pages unter einem **Unterpfad**
+(`/gienow-web/`), nicht an der Wurzel. Interne Pfade dürfen deshalb nirgends
+fest mit `/` beginnen — sie laufen alle über `pfad()` aus `src/lib/pfad.ts`.
+Bei einem Umzug auf eine eigene Domain genügt `BASE_PFAD=/ npm run build`.
+
+Die Unterseiten liegen als `<name>/index.html` vor, damit `/ueber-uns/` ohne
+Sonderregel für saubere URLs funktioniert.
+
+**Das Repo ist öffentlich** — GitHub Pages verlangt das bei kostenlosen
+Konten. Damit sind Inhalte und Bilder der Seite für jeden abrufbar.
+
+---
+
 ## 4. Noch nicht geprüft
 
-Die **Sichtprüfung im Browser steht aus**: die Browser-Pane dieser Sitzung
+Die **Sichtprüfung am Bildschirm steht aus**: die Browser-Pane dieser Sitzung
 kompositiert keine Frames, und die Chrome-Verbindung ist während der Arbeit
-abgerissen. Geprüft und in Ordnung: Typprüfung, Produktions-Build, alle vier
-Seiten laden ohne Konsolenfehler, alle Bildpfade antworten mit 200.
+abgerissen. Wie die Seiten tatsächlich *aussehen*, hat also noch niemand
+gesehen — bitte einmal selbst durchscrollen.
+
+Geprüft und in Ordnung: Typprüfung, Produktions-Build, alle vier Seiten laden
+lokal ohne Konsolenfehler, live antworten alle vier mit 200 und tragen den
+richtigen Titel, und alle 36 Bilder sind unter dem Unterpfad erreichbar.
