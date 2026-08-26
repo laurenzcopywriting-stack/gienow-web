@@ -1,0 +1,13 @@
+# Netlify baut die Seite selbst; ausgeliefert wird das Ergebnis aus dist/.
+#
+# BASE_PFAD=/ ist der entscheidende Unterschied zu GitHub Pages: dort lag die
+# Seite unter github.io/gienow-web/, hier an der Wurzel der eigenen Adresse.
+# vite.config.ts liest die Variable und setzt `base` entsprechend.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  BASE_PFAD = "/"
+  NODE_VERSION = "22"

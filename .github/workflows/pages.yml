@@ -19,37 +19,25 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  bauen:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-
-      - run: npm ci
-
-      # Der Basispfad kommt aus der Pages-Konfiguration. Damit stimmt er auch,
-      # falls das Repo einmal umbenannt wird.
-      - uses: actions/configure-pages@v5
-        id: pages
-
-      - run: npm run build
-        env:
-          BASE_PFAD: ${{ steps.pages.outputs.base_path }}/
-
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
-
+  # Frueher zwei Jobs: einer baute die Seite, der zweite lieferte sie aus.
+  # Seit dem Umzug auf Netlify wird hier nichts mehr gebaut — Netlify baut
+  # selbst aus diesem Repo mit `npm run build` und BASE_PFAD=/ (netlify.toml).
+  # Von hier geht nur noch `weiterleitung/` nach oben, damit jede alte Adresse
+  # zur neuen fuehrt statt eine zweite, nicht mehr gepflegte Fassung
+  # auszuliefern. Ein Job genuegt dafuer.
   veroeffentlichen:
-    needs: bauen
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: weiterleitung
+
       - uses: actions/deploy-pages@v4
         id: deploy

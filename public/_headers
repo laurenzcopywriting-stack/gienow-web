@@ -1,0 +1,15 @@
+
+# Vite haengt an jede Datei unter /assets/ einen Inhalts-Hash. Aendert sich
+# der Inhalt, aendert sich der Dateiname — die alte Fassung kann deshalb
+# beliebig lange im Zwischenspeicher bleiben.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Bilder tragen keinen Hash, werden aber selten ausgetauscht.
+/bilder/*
+  Cache-Control: public, max-age=604800
+
+# HTML dagegen nie lange halten: es verweist auf die gehashten Dateien und
+# ist die einzige Stelle, an der eine Aktualisierung sichtbar wird.
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
